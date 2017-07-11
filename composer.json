@@ -1,5 +1,11 @@
 {
     "name": "Jameron/breadcrumbs",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Jameron/breadcrumbs"
+        }
+    ],
     "autoload": {
         "psr-4": {"Jameron\\": "src/"}
     },

@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-use PHPAddons\UI\Breadcrumb;
+use Jameron\Breadcrumb;
 
 class BreadcrumbTest extends TestCase
 {

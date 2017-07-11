@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPAddons\UI;
+namespace Jameron;
 
 class Breadcrumb
 {

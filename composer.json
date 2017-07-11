@@ -1,5 +1,6 @@
 {
     "name": "jameron/breadcrumbs",
+    "version": "1.0.0",
     "repositories": [
         {
             "type": "vcs",

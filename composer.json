@@ -1,9 +1,9 @@
 {
-    "name": "Jameron/breadcrumbs",
+    "name": "jameron/breadcrumbs",
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Jameron/breadcrumbs"
+            "url": "https://github.com/jameron/breadcrumbs"
         }
     ],
     "autoload": {

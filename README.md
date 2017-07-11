@@ -1,16 +1,16 @@
-# php-breadcrumb
+# breadcrumb
 I wrote this to use in Laravel applications, but kept it loosely coupled so it can be used in any PHP application. The example view file uses blade template syntax but can easily be translated to straight up php or other templating engine.
 
 # To use within Laravel:
 
-Put Breadcrumb.php in folder App\Utils
+Put Breadcrumb.php in app directory 
 
 Run:
 ```composer dump-autoload```
 
 In your controller:
 ~~~~
-use App\Utils\Breadcrumb;
+use App\Breadcrumb;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller

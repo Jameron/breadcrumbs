@@ -1,4 +1,5 @@
 {
+    "name": "Jameron/breadcrumbs",
     "autoload": {
         "psr-4": {"PhpAddons\\": "src/"}
     },

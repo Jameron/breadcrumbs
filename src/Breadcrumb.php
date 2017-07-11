@@ -41,6 +41,7 @@ class Breadcrumb
      */
     public function build()
     {
+        // path to page
         $path = '';
         $active = false;
         $crumbs = explode('/', $this->trail);

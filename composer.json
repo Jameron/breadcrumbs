@@ -1,7 +1,22 @@
 {
     "name": "jameron/breadcrumbs",
+    "description": "Breadcrumb builder for PHP applications.",
+    "keywords": ["breadcrumb", "laravel", "php"],
+    "homepage": "http://cjmacfarlane.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cameron Macfarlane",
+            "email": "cammac1984@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {"Jameron\\": "src/"}
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/BreadcrumbTest.php"
+        ]
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1"

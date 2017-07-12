@@ -78,21 +78,41 @@ class Breadcrumb
         return $string;
     }
 
+    /**
+     * Add a crumb to the crumbs array
+     *
+     * @return void;
+     */
     public function addCrumb($crumb)
     {
         $this->crumbs[] = $crumb;
     }
 
+    /**
+     * Set the current route
+     *
+     * @return void;
+     */
     public function setRoute($route) 
     {
         $this->route = $route;
     }
 
+    /**
+     * Set the breadcrumb start
+     *
+     * @return void;
+     */
     public function setStart($start) 
     {
         $this->start = $start;
     }
 
+    /**
+     * Add the start to the beginning of the crumb
+     *
+     * @return void;
+     */
     private function setBreadcrumbStart($start) 
     {
         if (count($start)) {

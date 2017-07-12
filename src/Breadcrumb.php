@@ -7,31 +7,30 @@ class Breadcrumb
     /**
      * The route path to current page, excluding domain. e.g. /path/to/current/page
      */
-    protected $trail;
+    protected $route  = [];
 
     /**
      * Prepends route to beginning of breadcrumb.
      * e.g. home would result in breacrumb path /home/path/to/current/page
      */
-    protected $start;
+    protected $start = [];
 
     /**
      * Formatted array of all links in breadcrumb.
      */
-    protected $items;
+    protected $crumbs = [];
 
     /**
      * Constructor for Breadcrumb.
      *
-     * @param array $trail
-     * @param string $start
+     * @param array $route
+     * @param array $start
      * @return void
      */
-    public function __construct($trail = null, $start = null)
+    public function __construct($route = null, $start = null)
     {
-        $this->trail = ($trail) ? $trail : [];
-        $this->start = ($start) ? str_replace('/', '', $start) : '';
-        $this->items = [];
+        $this->setRoute($route);
+        $this->setStart($start);
     }
 
     /**
@@ -41,22 +40,13 @@ class Breadcrumb
      */
     public function build()
     {
-        // path to page
         $path = '';
         $active = false;
-        $crumbs = explode('/', $this->trail);
 
-        if (! empty($this->start)) {
-            if ($this->start['url'] == $this->trail) {
-                $active = true;
-            }
+        $this->route = $this->removeFirstSlash($this->route);
+        $crumbs = explode('/', $this->route);
 
-            $this->items[] = [
-                'link' => '/'.$this->start,
-                'title' => ucfirst($this->start),
-                'active' => $active,
-                ];
-        }
+        $this->setBreadcrumbStart($this->start);
 
         $total_number_of_crumbs = count($crumbs);
         foreach ($crumbs as $key => $crumb) {
@@ -65,13 +55,57 @@ class Breadcrumb
                 $active = true;
             }
 
-            $this->items[] = [
+            $this->addCrumb([
                 'link' => $path,
                 'title' => ucwords(str_replace('-', ' ', str_replace('_', ' ', $crumb))),
                 'active' => $active,
-                ];
+            ]);
         }
 
-        return $this->items;
+        return $this->crumbs;
+    }
+
+    /**
+     * If the route is prefixed with a slash, remove it.
+     *
+     * @return string
+     */
+    private function removeFirstSlash($string)
+    {
+        if (substr($string, 0, 1) === '/') {
+            $string = substr($string, 1);
+        }
+        return $string;
+    }
+
+    public function addCrumb($crumb)
+    {
+        $this->crumbs[] = $crumb;
+    }
+
+    public function setRoute($route) 
+    {
+        $this->route = $route;
+    }
+
+    public function setStart($start) 
+    {
+        $this->start = $start;
+    }
+
+    private function setBreadcrumbStart($start) 
+    {
+        if (count($start)) {
+            $active = false;
+            if ($start['url'] == $this->route) {
+                $active = true;
+            }
+
+            $this->addCrumb([
+                'link' => '/'.str_replace('/', '', $start['url']),
+                'title' => ucfirst($start['title']),
+                'active' => $active,
+            ]);
+        }
     }
 }

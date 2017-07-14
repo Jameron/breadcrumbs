@@ -23,7 +23,7 @@ add the facade to the aliases:
 ~~~~
 'aliases' => [
     // ...
-    'Breadcrumb' => Jameron\Breadcrumb\Breadcrumb::class
+    'Breadcrumb' => Jameron\Breadcrumb\Breadcrumb::class,
 ],
 ~~~~
 

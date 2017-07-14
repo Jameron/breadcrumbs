@@ -3,14 +3,33 @@ I wrote this to use in Laravel applications, but kept it loosely coupled so it c
 
 # To use within Laravel:
 
-Put Breadcrumb.php in app directory 
+To install run:
 
-Run:
-```composer dump-autoload```
+```composer require jameron/breadcrumb```
+
+Add to config/app.php
+
+add the service provider:
+
+~~~~
+'providers' => [
+    // ...
+    Jameron\Breadcrumb\Providers\BreadcrumbServiceProvider::class,
+],
+~~~~
+
+add the facade to the aliases:
+
+~~~~
+'aliases' => [
+    // ...
+    'Breadcrumb' => Jameron\Breadcrumb\Breadcrumb::class
+],
+~~~~
 
 In your controller:
 ~~~~
-use App\Breadcrumb;
+use Breadcrumb;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -38,6 +57,16 @@ Include the view partial into your layout or view file where you want the breadc
 
 E.g.
 @include('partials.utils.breadcrumb', ['items' => $breadcrumb])
+
+in your breadcrumb partial add the following:
+
+~~~~
+<ol class="breadcrumb">
+	@foreach($items as $item)
+	<li>@if(!$item['active'])<a href="{!! $item['link'] !!}"@if($item['active']) class="active"@endif>@endif{!! $item['title'] !!}@if(!$item['active'])</a>@endif</li>
+	@endforeach
+</ol>
+~~~~
 
 
 ## License

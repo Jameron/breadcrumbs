@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+use Jameron\Breadcrumb\Breadcrumb;
 
 require_once 'vendor/autoload.php';
 
@@ -9,7 +10,7 @@ class BreadcrumbTest extends TestCase
     private $bc;
 
     public function setUp() {
-        $this->bc = new \Jameron\Breadcrumb();
+        $this->bc = new Breadcrumb();
     }
 
     public function tearDown() {

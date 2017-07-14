@@ -1,6 +1,8 @@
 <?php
 
-namespace Jameron\Breadcrumbs;
+namespace Jameron\Breadcrumb\Providers;
+
+use Jameron\Breadcrumb\Breadcrumb;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +25,9 @@ class BreadcrumbServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+         $this->app->singleton(Breadcrumb::class, function ($app)
+		{
+            return new Breadcrumb();
+		});
     }
 }

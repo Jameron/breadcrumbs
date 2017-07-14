@@ -24,10 +24,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Jameorn\\Breadcrumb\\ServiceProvider"
+                "Jameron\\Breadcrumb\\Providers\\BreadcrumbServiceProvider"
             ],
             "aliases": {
-                "Breadcrumb": "Jameron\\Breadcrumb\\Facade"
+                "Breadcrumb": "Jameron\\Breadcrumb\\Facades\\Facade"
             }
         }
     }

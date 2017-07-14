@@ -1,6 +1,6 @@
 <?php
 
-namespace Jameron;
+namespace Jameron\Breadcrumb;
 
 class Breadcrumb
 {
@@ -43,7 +43,7 @@ class Breadcrumb
         $path = '';
         $active = false;
 
-        $this->route = $this->removeFirstSlash($this->route);
+        $this->route = trim($this->route, '/');
         $crumbs = explode('/', $this->route);
 
         $this->setBreadcrumbStart($this->start);
@@ -66,19 +66,6 @@ class Breadcrumb
     }
 
     /**
-     * If the route is prefixed with a slash, remove it.
-     *
-     * @return string
-     */
-    private function removeFirstSlash($string)
-    {
-        if (substr($string, 0, 1) === '/') {
-            $string = substr($string, 1);
-        }
-        return $string;
-    }
-
-    /**
      * Add a crumb to the crumbs array
      *
      * @return void;
@@ -96,6 +83,8 @@ class Breadcrumb
     public function setRoute($route) 
     {
         $this->route = $route;
+
+        return $this;
     }
 
     /**
@@ -106,6 +95,8 @@ class Breadcrumb
     public function setStart($start) 
     {
         $this->start = $start;
+
+        return $this;
     }
 
     /**
@@ -127,5 +118,28 @@ class Breadcrumb
                 'active' => $active,
             ]);
         }
+    }
+
+
+    /**
+     * Convert the collection to its string representation.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $this->build();
+        return $this->toJson();
+    }
+
+    /**
+     * Get the collection of items as JSON.
+     *
+     * @param  int  $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->crumbs, $options);
     }
 }

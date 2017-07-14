@@ -39,7 +39,7 @@ class ResourceController extends Controller
 
     public function __construct()
     {
-        $this->home_route = 'home';
+        $this->home_route = ['title'=>'home','url'=>'/home'];
     }
 
     public function index(Request $request)

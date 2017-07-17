@@ -49,6 +49,7 @@ class Breadcrumb
         $this->setBreadcrumbStart($this->start);
 
         $total_number_of_crumbs = count($crumbs);
+
         foreach ($crumbs as $key => $crumb) {
             $path .= '/'.$crumb;
             if ($key == $total_number_of_crumbs - 1) {

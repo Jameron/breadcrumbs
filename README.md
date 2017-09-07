@@ -62,9 +62,9 @@ in your breadcrumb partial add the following:
 
 ~~~~
 <ol class="breadcrumb">
-	@foreach($items as $item)
-	<li>@if(!$item['active'])<a href="{!! $item['link'] !!}"@if($item['active']) class="active"@endif>@endif{!! $item['title'] !!}@if(!$item['active'])</a>@endif</li>
-	@endforeach
+    @foreach($crumbs as $item)
+        <li>@if(!$item['active'])<a href="{!! $item['url'] !!}"@if($item['active']) class="active"@endif>@endif{!! $item['title'] !!}@if(!$item['active'])</a>@endif</li>
+    @endforeach
 </ol>
 ~~~~
 

@@ -10,12 +10,6 @@ class Breadcrumb
     protected $route  = [];
 
     /**
-     * Prepends route to beginning of breadcrumb.
-     * e.g. home would result in breacrumb path /home/path/to/current/page
-     */
-    protected $start = [];
-
-    /**
      * Formatted array of all links in breadcrumb.
      */
     protected $crumbs = [];
@@ -27,10 +21,10 @@ class Breadcrumb
      * @param array $start
      * @return void
      */
-    public function __construct($route = null, $start = null)
+    public function __construct($route = null)
     {
         $this->setRoute($route);
-        $this->setStart($start);
+        $this->build();
     }
 
     /**
@@ -42,12 +36,8 @@ class Breadcrumb
     {
         $path = '';
         $active = false;
-
         $this->route = trim($this->route, '/');
         $crumbs = explode('/', $this->route);
-
-        $this->setBreadcrumbStart($this->start);
-
         $total_number_of_crumbs = count($crumbs);
 
         foreach ($crumbs as $key => $crumb) {
@@ -63,6 +53,10 @@ class Breadcrumb
             ]);
         }
 
+    }
+
+    public function output()
+    {
         return $this->crumbs;
     }
 
@@ -71,13 +65,15 @@ class Breadcrumb
      *
      * @return void;
      */
-    public function addCrumb($crumb)
+    public function addCrumb($crumb, $key=null)
     {
-        if(isset($crumb['url']) && !empty($crumb['url']) && isset($crumb['title']) && !empty($crumb['title'])) {
-            $this->crumbs[] = $crumb;
-        }
+        $this->crumbs[] = $crumb;
 
-        return $this;
+        /*
+         *if($key && $key <= count($this->crumbs)) {
+         *    $this->crumbs[$key] = $crumb;
+         *}
+         */
     }
 
     /**
@@ -93,76 +89,13 @@ class Breadcrumb
     }
 
     /**
-     * Set the breadcrumb start
-     *
-     * @return void;
-     */
-    public function setStart($start) 
-    {
-        $this->start = $start;
-
-        return $this;
-    }
-
-    /**
-     * Remove a crumb
-     *
-     * @return $this;
-     */
-    public function remove($key)
-    {
-        if(isset($this->crumbs[$key]) && !empty($this->crumbs[$key])) {
-            unset($this->crumbs[$key]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Replace a crumb
-     *
-     * @return $this;
-     */
-    public function replace($key, $crumb)
-    {
-        if(isset($this->crumbs[$key]) && !empty($this->crumbs[$key])) {
-            $this->crumbs[$key] = $crumb;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add the start to the beginning of the crumb
-     *
-     * @return void;
-     */
-    private function setBreadcrumbStart($start) 
-    {
-        if (count($start)) {
-            $active = false;
-            if ($start['url'] == $this->route) {
-                $active = true;
-            }
-
-            $this->addCrumb([
-                'url' => '/'.str_replace('/', '', $start['url']),
-                'title' => ucfirst($start['title']),
-                'active' => $active,
-            ]);
-        }
-    }
-
-
-    /**
-     * Convert the array to its string representation.
+     * Convert the collection to its string representation.
      *
      * @return string
      */
     public function __toString()
     {
-        $this->build();
-        return $this->toJson();
+        //return $this->toJson();
     }
 
     /**
@@ -173,6 +106,6 @@ class Breadcrumb
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->crumbs, $options);
+        //return json_encode($this->crumbs, $options);
     }
 }

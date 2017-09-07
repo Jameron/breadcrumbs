@@ -25,9 +25,8 @@ class BreadcrumbServiceProvider extends ServiceProvider
      */
     public function register()
     {
-         $this->app->singleton(Breadcrumb::class, function ($app)
-		{
-            return new Breadcrumb();
-		});
+         $this->app->bind('breadcrumb', function () {
+             return new Breadcrumb;
+         });
     }
 }

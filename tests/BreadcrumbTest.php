@@ -31,8 +31,8 @@ class BreadcrumbTest extends TestCase
     {
         $route = '/test/1/edit';
         $start = [
-            'title' => 'Home',
-            'url' => '/'
+            'url' => '/',
+            'title' => 'Home'
         ];
 
         $this->bc->setRoute($route);
@@ -41,5 +41,25 @@ class BreadcrumbTest extends TestCase
 
         $this->assertEquals($breadcrumbs[0]['title'], 'Home');
 
+    }
+
+    public function testAddCrumb()
+    {
+        $route = '/test/1/edit';
+
+        $this->bc->setRoute($route);
+
+        /*
+         *$this->bc->addCrumb([
+         *    'url'   => '/test/1/new-test',
+         *    'title' => 'NewTest'
+         *]);
+         */
+
+        $breadcrumbs = $this->bc->build();
+        
+        print_r($breadcrumbs);
+
+        $this->assertEquals($breadcrumbs[3]['title'], 'NewTest');
     }
 }

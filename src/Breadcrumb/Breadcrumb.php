@@ -57,7 +57,7 @@ class Breadcrumb
             }
 
             $this->addCrumb([
-                'link' => $path,
+                'url' => $path,
                 'title' => ucwords(str_replace('-', ' ', str_replace('_', ' ', $crumb))),
                 'active' => $active,
             ]);
@@ -73,7 +73,11 @@ class Breadcrumb
      */
     public function addCrumb($crumb)
     {
-        $this->crumbs[] = $crumb;
+        if(isset($crumb['url']) && !empty($crumb['url']) && isset($crumb['title']) && !empty($crumb['title'])) {
+            $this->crumbs[] = $crumb;
+        }
+
+        return $this;
     }
 
     /**
@@ -101,6 +105,34 @@ class Breadcrumb
     }
 
     /**
+     * Remove a crumb
+     *
+     * @return $this;
+     */
+    public function remove($key)
+    {
+        if(isset($this->crumbs[$key]) && !empty($this->crumbs[$key])) {
+            unset($this->crumbs[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Replace a crumb
+     *
+     * @return $this;
+     */
+    public function replace($key, $crumb)
+    {
+        if(isset($this->crumbs[$key]) && !empty($this->crumbs[$key])) {
+            $this->crumbs[$key] = $crumb;
+        }
+
+        return $this;
+    }
+
+    /**
      * Add the start to the beginning of the crumb
      *
      * @return void;
@@ -114,7 +146,7 @@ class Breadcrumb
             }
 
             $this->addCrumb([
-                'link' => '/'.str_replace('/', '', $start['url']),
+                'url' => '/'.str_replace('/', '', $start['url']),
                 'title' => ucfirst($start['title']),
                 'active' => $active,
             ]);
@@ -123,7 +155,7 @@ class Breadcrumb
 
 
     /**
-     * Convert the collection to its string representation.
+     * Convert the array to its string representation.
      *
      * @return string
      */

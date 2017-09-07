@@ -5,7 +5,7 @@ I wrote this to use in Laravel applications, but kept it loosely coupled so it c
 
 To install run:
 
-```composer require jameron/breadcrumb```
+```composer require jameron/breadcrumbs```
 
 Add to config/app.php
 
